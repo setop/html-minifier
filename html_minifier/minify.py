@@ -9,8 +9,7 @@ class Minifier(object):
     _array = ("}{", "><", "}<", ">{")
     _array_regex = (r"}\s{", r">\s<", r"}\s<", r">\s{")
 
-    def __init__(self, html=""):
-        self.html = html
+    def __init__(self):
         self.convert_to_space = re.compile(self._re_for_Whitespace)
         self.remove_commets = re.compile(self._re_for_commets)
         self.remove_spaces_in_tags = self.list_regex_spaces_tags()
@@ -39,8 +38,7 @@ class Minifier(object):
     def removeComments(self, html):
         return self.remove_commets.sub("", html)
 
-    def minify(self):
-        html = self.html
+    def minify(self, html):
         html = self.stripWhitespace(html)
         html = self.collapseWhitespace(html)
         html = self.removeComments(html)
@@ -51,8 +49,8 @@ class Minifier(object):
 
 class DjangoMinifier(Minifier):
 
-    def __init__(self, html=""):
+    def __init__(self):
         self._array += ("{{", "}}", "{%", "%}")
         self._array_regex += (r"(\s+)?{{(\s+)?", r"(\s+)?}}(\s+)?",
                               r"(\s+)?{%(\s+)?", r"(\s+)?%}(\s+)?")
-        super(DjangoMinifier, self).__init__(html)
+        super(DjangoMinifier, self).__init__()

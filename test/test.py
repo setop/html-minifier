@@ -25,8 +25,8 @@ class TestMinify(unittest.TestCase):
             f.close()
 
     def test_minifier(self):
-        mini = Minifier(self.html)
-        self.assertEqual(mini.minify(), self.html_min)
+        mini = Minifier()
+        self.assertEqual(mini.minify(self.html), self.html_min)
 
 
 class TestMinifyDjango(TestMinify):
@@ -34,5 +34,5 @@ class TestMinifyDjango(TestMinify):
     file_name = "django"
 
     def test_minifier(self):
-        mini = DjangoMinifier(self.html)
-        self.assertEqual(mini.minify(), self.html_min)
+        mini = DjangoMinifier()
+        self.assertEqual(mini.minify(self.html), self.html_min)
